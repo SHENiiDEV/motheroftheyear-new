@@ -14,8 +14,11 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name',
+        'surname',
         'email',
         'password',
+        'phone_number',
+        'date_of_birth',
         'telegram_id',
         'telegram_username',
         'specialist_id',
@@ -30,6 +33,7 @@ class User extends Authenticatable
         'billing_country',
         'billing_postal_code',
         'vat_number',
+        'agreed_terms',
     ];
 
     protected $hidden = [
@@ -41,11 +45,13 @@ class User extends Authenticatable
     {
         return [
             'email_verified_at' => 'datetime',
+            'date_of_birth' => 'date',
             'password' => 'hashed',
             'weekly_price' => 'decimal:2',
             'wallet_balance' => 'decimal:2',
             'telegram_id' => 'integer',
             'specialist_id' => 'integer',
+            'agreed_terms' => 'boolean',
         ];
     }
 

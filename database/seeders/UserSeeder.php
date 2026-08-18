@@ -19,9 +19,12 @@ class UserSeeder extends Seeder
 
         // Mother 1
         $user1 = User::create([
-            'name' => 'Catherine Miller',
+            'name' => 'Catherine',
+            'surname' => 'Miller',
             'email' => 'catherine@example.com',
             'password' => Hash::make('password'),
+            'phone_number' => '+44 7911 123456',
+            'date_of_birth' => '1990-05-15',
             'telegram_id' => 100001,
             'telegram_username' => 'catherine_m',
             'specialist_id' => 2, // Dr. Emily Carter (€99/wk)
@@ -31,11 +34,12 @@ class UserSeeder extends Seeder
             'wallet_balance' => 300.00,
             'invite_token' => Str::random(32),
             'billing_name' => 'Catherine Miller',
-            'billing_address' => '124 Ocean Drive',
-            'billing_city' => 'San Francisco',
-            'billing_country' => 'United States',
-            'billing_postal_code' => '94103',
-            'vat_number' => 'US-9920194',
+            'billing_address' => '58 Mund St, Apt 4B',
+            'billing_city' => 'London',
+            'billing_country' => 'United Kingdom',
+            'billing_postal_code' => 'W14 9LZ',
+            'vat_number' => 'GB-9920194',
+            'agreed_terms' => true,
         ]);
 
         // Initial deposit transaction
@@ -67,20 +71,23 @@ class UserSeeder extends Seeder
             'status' => 'paid',
             'billing_snapshot' => [
                 'name' => 'Catherine Miller',
-                'address' => '124 Ocean Drive',
-                'city' => 'San Francisco',
-                'country' => 'United States',
-                'postal_code' => '94103',
-                'vat_number' => 'US-9920194',
+                'address' => '58 Mund St, Apt 4B',
+                'city' => 'London',
+                'country' => 'United Kingdom',
+                'postal_code' => 'W14 9LZ',
+                'vat_number' => 'GB-9920194',
             ],
             'company_snapshot' => $companyDetails,
         ]);
 
         // Mother 2
         $user2 = User::create([
-            'name' => 'Olivia Taylor',
+            'name' => 'Olivia',
+            'surname' => 'Taylor',
             'email' => 'olivia@example.com',
             'password' => Hash::make('password'),
+            'phone_number' => '+44 7922 654321',
+            'date_of_birth' => '1992-08-20',
             'telegram_id' => 100002,
             'telegram_username' => 'olivia_t',
             'specialist_id' => 1, // Dr. Sarah Jenkins (€49/wk)
@@ -91,9 +98,10 @@ class UserSeeder extends Seeder
             'invite_token' => Str::random(32),
             'billing_name' => 'Olivia Taylor',
             'billing_address' => '500 Market St',
-            'billing_city' => 'New York',
-            'billing_country' => 'United States',
-            'billing_postal_code' => '10001',
+            'billing_city' => 'London',
+            'billing_country' => 'United Kingdom',
+            'billing_postal_code' => 'EC1A 1BB',
+            'agreed_terms' => true,
         ]);
 
         // Seed sleep logs for Catherine

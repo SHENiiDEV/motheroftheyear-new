@@ -23,17 +23,26 @@ class MotherOfTheYearTest extends TestCase
     public function test_client_can_register_with_specialist_id(): void
     {
         $response = $this->post('/register', [
-            'name' => 'Emma Watson',
+            'name' => 'Emma',
+            'surname' => 'Watson',
             'email' => 'emma@example.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
+            'phone_number' => '+44 7911 999888',
+            'date_of_birth' => '1991-03-12',
+            'billing_address' => '10 Downing St',
+            'billing_city' => 'London',
+            'billing_country' => 'United Kingdom',
+            'billing_postal_code' => 'SW1A 2AA',
+            'terms' => true,
             'specialist_id' => 2,
         ]);
 
         $response->assertRedirect('/dashboard');
 
         $this->assertDatabaseHas('users', [
-            'name' => 'Emma Watson',
+            'name' => 'Emma',
+            'surname' => 'Watson',
             'email' => 'emma@example.com',
             'specialist_id' => 2,
         ]);

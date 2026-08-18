@@ -182,9 +182,17 @@ export default function Catalog({ doctors, botUsername }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         specialist_id: 2,
         name: '',
+        surname: '',
         email: '',
         password: '',
         password_confirmation: '',
+        phone_number: '',
+        date_of_birth: '',
+        billing_address: '',
+        billing_city: '',
+        billing_country: 'United Kingdom',
+        billing_postal_code: '',
+        terms: false,
     });
 
     const handleSelectDoctor = (doctor) => {
@@ -763,82 +771,240 @@ export default function Catalog({ doctors, botUsername }) {
                                 </div>
                             </div>
 
-                            <form onSubmit={handleRegisterSubmit} className="space-y-4">
+                            <form onSubmit={handleRegisterSubmit} className="space-y-4 text-left">
+                                {/* First Name & Surname */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            First Name *
+                                        </label>
+                                        <div className="relative">
+                                            <User className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="text"
+                                                required
+                                                placeholder="Catherine"
+                                                value={data.name}
+                                                onChange={(e) => setData('name', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                        {errors.name && <div className="text-[11px] text-rose-400 mt-1">{errors.name}</div>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            Surname *
+                                        </label>
+                                        <div className="relative">
+                                            <User className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="text"
+                                                required
+                                                placeholder="Miller"
+                                                value={data.surname}
+                                                onChange={(e) => setData('surname', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                        {errors.surname && <div className="text-[11px] text-rose-400 mt-1">{errors.surname}</div>}
+                                    </div>
+                                </div>
+
+                                {/* Email & Phone */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            Email Address *
+                                        </label>
+                                        <div className="relative">
+                                            <Mail className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="email"
+                                                required
+                                                placeholder="catherine@example.com"
+                                                value={data.email}
+                                                onChange={(e) => setData('email', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                        {errors.email && <div className="text-[11px] text-rose-400 mt-1">{errors.email}</div>}
+                                    </div>
+
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            Phone Number *
+                                        </label>
+                                        <div className="relative">
+                                            <Phone className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="tel"
+                                                required
+                                                placeholder="+44 7911 123456"
+                                                value={data.phone_number}
+                                                onChange={(e) => setData('phone_number', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                        {errors.phone_number && <div className="text-[11px] text-rose-400 mt-1">{errors.phone_number}</div>}
+                                    </div>
+                                </div>
+
+                                {/* Date of Birth */}
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                                        Your Full Name
+                                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                        Date of Birth *
                                     </label>
-                                    <div className="relative">
-                                        <User className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
+                                    <input
+                                        type="date"
+                                        required
+                                        value={data.date_of_birth}
+                                        onChange={(e) => setData('date_of_birth', e.target.value)}
+                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                    />
+                                    {errors.date_of_birth && <div className="text-[11px] text-rose-400 mt-1">{errors.date_of_birth}</div>}
+                                </div>
+
+                                {/* Address Section */}
+                                <div className="pt-2 border-t border-slate-800">
+                                    <span className="text-[10px] font-bold text-rose-300 uppercase tracking-widest block mb-2">
+                                        Official Billing Address Details
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                                        1. Street, house number, apartment *
+                                    </label>
+                                    <input
+                                        type="text"
+                                        required
+                                        placeholder="58 Mund St, Apt 4B"
+                                        value={data.billing_address}
+                                        onChange={(e) => setData('billing_address', e.target.value)}
+                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                    />
+                                    {errors.billing_address && <div className="text-[11px] text-rose-400 mt-1">{errors.billing_address}</div>}
+                                </div>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 mb-1">
+                                            2. City *
+                                        </label>
                                         <input
                                             type="text"
                                             required
-                                            placeholder="Catherine Miller"
-                                            value={data.name}
-                                            onChange={(e) => setData('name', e.target.value)}
-                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            placeholder="London"
+                                            value={data.billing_city}
+                                            onChange={(e) => setData('billing_city', e.target.value)}
+                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
                                         />
+                                        {errors.billing_city && <div className="text-[11px] text-rose-400 mt-1">{errors.billing_city}</div>}
                                     </div>
-                                    {errors.name && <div className="text-xs text-rose-400 mt-1">{errors.name}</div>}
+
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 mb-1">
+                                            4. Post Code *
+                                        </label>
+                                        <input
+                                            type="text"
+                                            required
+                                            placeholder="W14 9LZ"
+                                            value={data.billing_postal_code}
+                                            onChange={(e) => setData('billing_postal_code', e.target.value)}
+                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                        />
+                                        {errors.billing_postal_code && <div className="text-[11px] text-rose-400 mt-1">{errors.billing_postal_code}</div>}
+                                    </div>
                                 </div>
 
                                 <div>
-                                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                                        Email Address
+                                    <label className="block text-xs font-semibold text-slate-300 mb-1">
+                                        3. Country *
                                     </label>
-                                    <div className="relative">
-                                        <Mail className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
-                                        <input
-                                            type="email"
-                                            required
-                                            placeholder="catherine@example.com"
-                                            value={data.email}
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors"
-                                        />
-                                    </div>
-                                    {errors.email && <div className="text-xs text-rose-400 mt-1">{errors.email}</div>}
+                                    <select
+                                        required
+                                        value={data.billing_country}
+                                        onChange={(e) => setData('billing_country', e.target.value)}
+                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                    >
+                                        {WORLD_COUNTRIES.map((c) => (
+                                            <option key={c} value={c}>
+                                                {c}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.billing_country && <div className="text-[11px] text-rose-400 mt-1">{errors.billing_country}</div>}
                                 </div>
 
-                                <div>
-                                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                                        Account Password
-                                    </label>
-                                    <div className="relative">
-                                        <Lock className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
-                                        <input
-                                            type="password"
-                                            required
-                                            placeholder="••••••••"
-                                            value={data.password}
-                                            onChange={(e) => setData('password', e.target.value)}
-                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors"
-                                        />
+                                {/* Password & Confirmation */}
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            Password *
+                                        </label>
+                                        <div className="relative">
+                                            <Lock className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="password"
+                                                required
+                                                placeholder="••••••••"
+                                                value={data.password}
+                                                onChange={(e) => setData('password', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                        {errors.password && <div className="text-[11px] text-rose-400 mt-1">{errors.password}</div>}
                                     </div>
-                                    {errors.password && <div className="text-xs text-rose-400 mt-1">{errors.password}</div>}
+
+                                    <div>
+                                        <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+                                            Confirm Password *
+                                        </label>
+                                        <div className="relative">
+                                            <Lock className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                                            <input
+                                                type="password"
+                                                required
+                                                placeholder="••••••••"
+                                                value={data.password_confirmation}
+                                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                                className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-9 pr-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div>
-                                    <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
-                                        Confirm Password
-                                    </label>
-                                    <div className="relative">
-                                        <Lock className="absolute left-3.5 top-3.5 w-4 h-4 text-slate-400" />
+                                {/* Checkbox Terms */}
+                                <div className="pt-1">
+                                    <label className="flex items-start gap-2.5 cursor-pointer text-xs text-slate-300">
                                         <input
-                                            type="password"
+                                            type="checkbox"
                                             required
-                                            placeholder="••••••••"
-                                            value={data.password_confirmation}
-                                            onChange={(e) => setData('password_confirmation', e.target.value)}
-                                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                            checked={data.terms}
+                                            onChange={(e) => setData('terms', e.target.checked)}
+                                            className="mt-0.5 rounded bg-slate-950 border-slate-800 text-rose-500 focus:ring-0 cursor-pointer"
                                         />
-                                    </div>
+                                        <span className="leading-relaxed text-[11px]">
+                                            I agree to the{' '}
+                                            <Link href={route('legal.terms')} target="_blank" className="font-bold text-rose-400 hover:underline">
+                                                Terms & Conditions
+                                            </Link>{' '}
+                                            and{' '}
+                                            <Link href={route('legal.privacy')} target="_blank" className="font-bold text-rose-400 hover:underline">
+                                                Privacy Policy
+                                            </Link>
+                                            .
+                                        </span>
+                                    </label>
+                                    {errors.terms && <div className="text-[11px] text-rose-400 mt-1">{errors.terms}</div>}
                                 </div>
 
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="w-full mt-4 py-3.5 px-4 bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-rose-500/30 flex items-center justify-center gap-2 hover:opacity-95 transition-opacity"
+                                    className="w-full mt-3 py-3.5 px-4 bg-gradient-to-r from-rose-500 to-purple-600 text-white font-bold text-sm rounded-xl shadow-lg shadow-rose-500/30 flex items-center justify-center gap-2 hover:opacity-95 transition-opacity"
                                 >
                                     {processing ? 'Creating Account...' : 'Create Account & Access Portal'}
                                 </button>
