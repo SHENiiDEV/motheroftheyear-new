@@ -24,11 +24,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'telegram_id' => 100001,
             'telegram_username' => 'catherine_m',
-            'specialist_id' => 2, // Dr. Emily Carter (€39/wk)
+            'specialist_id' => 2, // Dr. Emily Carter (€99/wk)
             'subscription_tier' => 'clinical care',
             'subscription_status' => 'active',
-            'weekly_price' => 39.00,
-            'wallet_balance' => 150.00,
+            'weekly_price' => 99.00,
+            'wallet_balance' => 300.00,
             'invite_token' => Str::random(32),
             'billing_name' => 'Catherine Miller',
             'billing_address' => '124 Ocean Drive',
@@ -42,18 +42,18 @@ class UserSeeder extends Seeder
         Transaction::create([
             'user_id' => $user1->id,
             'type' => 'deposit',
-            'amount' => 200.00,
+            'amount' => 300.00,
             'description' => 'Initial Wallet Deposit (Credit Card)',
-            'balance_after' => 200.00,
+            'balance_after' => 300.00,
         ]);
 
         // Subscription deduction transaction
         Transaction::create([
             'user_id' => $user1->id,
             'type' => 'deduction',
-            'amount' => 39.00,
+            'amount' => 99.00,
             'description' => 'Immediate Weekly Subscription Fee: Dr. Emily Carter, M.D., FAAP',
-            'balance_after' => 161.00,
+            'balance_after' => 201.00,
         ]);
 
         // Sample Invoice for Catherine
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder
             'user_id' => $user1->id,
             'doctor_id' => 2,
             'doctor_name' => 'Dr. Emily Carter, M.D., FAAP',
-            'amount' => 39.00,
+            'amount' => 99.00,
             'type' => 'subscription',
             'status' => 'paid',
             'billing_snapshot' => [
@@ -83,11 +83,11 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'telegram_id' => 100002,
             'telegram_username' => 'olivia_t',
-            'specialist_id' => 1, // Dr. Sarah Jenkins (€19/wk)
+            'specialist_id' => 1, // Dr. Sarah Jenkins (€49/wk)
             'subscription_tier' => 'standard care',
             'subscription_status' => 'active',
-            'weekly_price' => 19.00,
-            'wallet_balance' => 100.00,
+            'weekly_price' => 49.00,
+            'wallet_balance' => 200.00,
             'invite_token' => Str::random(32),
             'billing_name' => 'Olivia Taylor',
             'billing_address' => '500 Market St',
