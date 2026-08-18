@@ -240,17 +240,17 @@ export default function Catalog({ doctors, botUsername }) {
 
             {/* Navbar */}
             <nav className="relative z-20 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/70 sticky top-0">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
+                    <Link href="/" className="flex items-center gap-2 shrink-0">
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-lg shadow-rose-500/20 shrink-0">
                             <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                         </div>
-                        <span className="font-extrabold text-base sm:text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-rose-300">
+                        <span className="font-extrabold text-sm sm:text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-rose-300 whitespace-nowrap">
                             Mother of the Year
                         </span>
-                    </div>
+                    </Link>
 
-                    <div className="flex items-center gap-2 sm:gap-4">
+                    <div className="flex items-center gap-2 sm:gap-4 shrink-0">
                         <a
                             href="#doctors"
                             className="hidden md:inline-block text-sm font-semibold text-slate-300 hover:text-white transition-colors"
@@ -270,13 +270,28 @@ export default function Catalog({ doctors, botUsername }) {
                             FAQ
                         </a>
 
-                        {/* Multi-Currency Selector */}
-                        <div className="flex items-center gap-0.5 sm:gap-1 bg-slate-900 border border-slate-800 rounded-xl p-0.5 sm:p-1">
+                        {/* Mobile Compact Currency Switcher (1-pill cycler) */}
+                        <button
+                            onClick={() => {
+                                const codes = ['EUR', 'USD', 'GBP'];
+                                const nextIdx = (codes.indexOf(currency) + 1) % codes.length;
+                                handleCurrencySelect(codes[nextIdx]);
+                            }}
+                            className="sm:hidden px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-slate-200 flex items-center gap-1.5 shrink-0 shadow-sm"
+                            title="Tap to switch currency"
+                        >
+                            <span>{CURRENCIES[currency]?.flag}</span>
+                            <span>{currency}</span>
+                            <span className="text-[10px] text-slate-400">▼</span>
+                        </button>
+
+                        {/* Desktop Multi-Currency Selector (Full 3 pills) */}
+                        <div className="hidden sm:flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1 shrink-0">
                             {Object.values(CURRENCIES).map((curr) => (
                                 <button
                                     key={curr.code}
                                     onClick={() => handleCurrencySelect(curr.code)}
-                                    className={`px-2 sm:px-2.5 py-1 rounded-lg text-[11px] sm:text-xs font-bold transition-all flex items-center gap-0.5 sm:gap-1 ${
+                                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
                                         currency === curr.code
                                             ? 'bg-rose-500 text-white shadow-md'
                                             : 'text-slate-400 hover:text-white'
@@ -290,7 +305,7 @@ export default function Catalog({ doctors, botUsername }) {
 
                         <Link
                             href={route('login')}
-                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap"
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
                         >
                             Login
                         </Link>
