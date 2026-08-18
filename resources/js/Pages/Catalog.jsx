@@ -160,6 +160,7 @@ export default function Catalog({ doctors, botUsername }) {
     const [currency, setCurrency] = useState(() => {
         return localStorage.getItem('app_currency') || 'EUR';
     });
+    const [showCurrencyMenu, setShowCurrencyMenu] = useState(false);
 
     const handleCurrencySelect = (code) => {
         setCurrency(code);
@@ -239,15 +240,20 @@ export default function Catalog({ doctors, botUsername }) {
             </div>
 
             {/* Navbar */}
-            <nav className="relative z-20 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/70 sticky top-0">
-                <div className="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <nav className="relative z-20 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/80 sticky top-0">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
                     <Link href="/" className="flex items-center gap-2 shrink-0">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-lg shadow-rose-500/20 shrink-0">
-                            <Moon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-lg shadow-rose-500/20 shrink-0">
+                            <Moon className="w-4 h-4 text-white" />
                         </div>
-                        <span className="font-extrabold text-sm sm:text-xl tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-slate-200 to-rose-300 whitespace-nowrap">
-                            Mother of the Year
-                        </span>
+                        <div className="flex flex-row items-center gap-1.5 leading-none">
+                            <span className="font-black text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
+                                MOTHER
+                            </span>
+                            <span className="text-[10px] sm:text-xs font-bold text-rose-300 uppercase tracking-wider whitespace-nowrap opacity-90">
+                                OF THE YEAR
+                            </span>
+                        </div>
                     </Link>
 
                     <div className="flex items-center gap-2 sm:gap-4 shrink-0">
@@ -270,44 +276,55 @@ export default function Catalog({ doctors, botUsername }) {
                             FAQ
                         </a>
 
-                        {/* Mobile Compact Currency Switcher (1-pill cycler) */}
-                        <button
-                            onClick={() => {
-                                const codes = ['EUR', 'USD', 'GBP'];
-                                const nextIdx = (codes.indexOf(currency) + 1) % codes.length;
-                                handleCurrencySelect(codes[nextIdx]);
-                            }}
-                            className="sm:hidden px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-slate-200 flex items-center gap-1.5 shrink-0 shadow-sm"
-                            title="Tap to switch currency"
-                        >
-                            <span>{CURRENCIES[currency]?.flag}</span>
-                            <span>{currency}</span>
-                            <span className="text-[10px] text-slate-400">▼</span>
-                        </button>
+                        {/* Interactive Floating Currency Dropdown */}
+                        <div className="relative shrink-0">
+                            <button
+                                onClick={() => setShowCurrencyMenu(!showCurrencyMenu)}
+                                className="px-2.5 py-1.5 rounded-xl bg-slate-900/90 hover:bg-slate-800 border border-slate-800 text-xs font-bold text-slate-200 flex items-center gap-1.5 shadow-sm transition-all"
+                            >
+                                <span>{CURRENCIES[currency]?.flag}</span>
+                                <span className="font-extrabold">{currency}</span>
+                                <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform ${showCurrencyMenu ? 'rotate-180' : ''}`} />
+                            </button>
 
-                        {/* Desktop Multi-Currency Selector (Full 3 pills) */}
-                        <div className="hidden sm:flex items-center gap-1 bg-slate-900 border border-slate-800 rounded-xl p-1 shrink-0">
-                            {Object.values(CURRENCIES).map((curr) => (
-                                <button
-                                    key={curr.code}
-                                    onClick={() => handleCurrencySelect(curr.code)}
-                                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                                        currency === curr.code
-                                            ? 'bg-rose-500 text-white shadow-md'
-                                            : 'text-slate-400 hover:text-white'
-                                    }`}
-                                >
-                                    <span>{curr.flag}</span>
-                                    <span>{curr.code}</span>
-                                </button>
-                            ))}
+                            <AnimatePresence>
+                                {showCurrencyMenu && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: 10 }}
+                                        className="absolute right-0 mt-2 w-36 bg-slate-900/95 border border-slate-800 rounded-2xl shadow-2xl backdrop-blur-xl p-1.5 z-50 space-y-1"
+                                    >
+                                        {Object.values(CURRENCIES).map((curr) => (
+                                            <button
+                                                key={curr.code}
+                                                onClick={() => {
+                                                    handleCurrencySelect(curr.code);
+                                                    setShowCurrencyMenu(false);
+                                                }}
+                                                className={`w-full px-3 py-2 rounded-xl text-xs font-bold flex items-center justify-between transition-colors ${
+                                                    currency === curr.code
+                                                        ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30'
+                                                        : 'text-slate-300 hover:bg-slate-800'
+                                                }`}
+                                            >
+                                                <span className="flex items-center gap-2">
+                                                    <span>{curr.flag}</span>
+                                                    <span>{curr.code}</span>
+                                                </span>
+                                                {currency === curr.code && <Check className="w-3.5 h-3.5 text-rose-400" />}
+                                            </button>
+                                        ))}
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
                         </div>
 
                         <Link
                             href={route('login')}
                             className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
                         >
-                            Login
+                            Client Login
                         </Link>
                     </div>
                 </div>

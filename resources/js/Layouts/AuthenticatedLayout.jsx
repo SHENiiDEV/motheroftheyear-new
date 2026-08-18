@@ -31,13 +31,18 @@ export default function AuthenticatedLayout({ header, children, selectedCurrency
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex h-16 justify-between items-center">
                         <div className="flex items-center gap-8">
-                            <Link href="/" className="flex items-center gap-2">
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-md">
+                            <Link href="/" className="flex items-center gap-2 shrink-0">
+                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-md shrink-0">
                                     <Moon className="w-4 h-4 text-white" />
                                 </div>
-                                <span className="font-extrabold text-lg bg-clip-text text-transparent bg-gradient-to-r from-white to-rose-300">
-                                    Mother of the Year
-                                </span>
+                                <div className="flex flex-row items-center gap-1.5 leading-none">
+                                    <span className="font-black text-sm tracking-tight text-white whitespace-nowrap">
+                                        MOTHER
+                                    </span>
+                                    <span className="text-[10px] font-bold text-rose-300 uppercase tracking-wider whitespace-nowrap opacity-90">
+                                        OF THE YEAR
+                                    </span>
+                                </div>
                             </Link>
 
                             <div className="hidden space-x-4 sm:flex">
@@ -67,22 +72,15 @@ export default function AuthenticatedLayout({ header, children, selectedCurrency
                         </div>
 
                         <div className="hidden sm:flex sm:items-center gap-4">
-                            {/* Currency Selector */}
-                            <div className="flex items-center gap-1 bg-slate-950 border border-slate-800 rounded-xl p-1">
-                                {Object.values(CURRENCIES).map((curr) => (
-                                    <button
-                                        key={curr.code}
-                                        onClick={() => handleCurrencySelect(curr.code)}
-                                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1 ${
-                                            (selectedCurrency || currency) === curr.code
-                                                ? 'bg-rose-500 text-white shadow-md'
-                                                : 'text-slate-400 hover:text-white hover:bg-slate-900'
-                                        }`}
-                                    >
-                                        <span>{curr.flag}</span>
-                                        <span>{curr.code}</span>
-                                    </button>
-                                ))}
+                            {/* Currency Switcher Dropdown */}
+                            <div className="relative shrink-0">
+                                <button
+                                    onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
+                                    className="px-2.5 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-xs font-bold text-slate-200 flex items-center gap-1.5 shadow-sm"
+                                >
+                                    <span>{currentCurr?.flag}</span>
+                                    <span className="font-extrabold">{currentCurr?.code}</span>
+                                </button>
                             </div>
 
                             {/* User Profile Dropdown */}
