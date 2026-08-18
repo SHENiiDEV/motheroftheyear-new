@@ -114,46 +114,50 @@ export default function Dashboard({ user, company, children, sleepLogs, stats, t
                         </p>
                     </div>
 
-                    <div className="flex flex-wrap items-center gap-3">
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                         {/* Emergency SOS Button */}
                         <button
                             onClick={() => setShowSosModal(true)}
-                            className="px-3.5 py-2 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shadow-lg shadow-rose-600/30 flex items-center gap-1.5 transition-all animate-pulse"
+                            className="px-3 py-2 bg-rose-600 hover:bg-rose-700 text-white font-black text-xs rounded-xl shadow-lg shadow-rose-600/30 flex items-center gap-1.5 transition-all animate-pulse"
                         >
                             <ShieldAlert className="w-4 h-4" /> Priority SOS
                         </button>
 
-                        <div className="flex items-center gap-3 bg-slate-900/90 border border-slate-800 p-2.5 rounded-2xl backdrop-blur-xl">
-                            <img
-                                src={user.specialist?.avatar}
-                                alt={user.specialist?.name}
-                                className="w-10 h-10 rounded-full object-cover border border-rose-500"
-                            />
-                            <div>
-                                <div className="text-xs text-slate-400">Attending Physician:</div>
-                                <div className="text-sm font-bold text-white flex items-center gap-2">
-                                    {user.specialist?.name}
-                                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                                        {formatPrice(user.weekly_price, currency)}/wk
-                                    </span>
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-3 bg-slate-900/90 border border-slate-800 p-2 sm:p-2.5 rounded-2xl backdrop-blur-xl">
+                            <div className="flex items-center gap-2">
+                                <img
+                                    src={user.specialist?.avatar}
+                                    alt={user.specialist?.name}
+                                    className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border border-rose-500"
+                                />
+                                <div>
+                                    <div className="text-[10px] sm:text-xs text-slate-400">Attending Doctor:</div>
+                                    <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
+                                        <span className="truncate max-w-[120px] sm:max-w-[180px]">{user.specialist?.name}</span>
+                                        <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
+                                            {formatPrice(user.weekly_price, currency)}/wk
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="h-8 w-px bg-slate-800 mx-1" />
+                            <div className="hidden sm:block h-8 w-px bg-slate-800 mx-0.5" />
 
-                            <div>
-                                <div className="text-[10px] text-slate-400">Wallet Balance:</div>
-                                <div className="text-xs font-black text-emerald-400">
-                                    {formatPrice(user.wallet_balance, currency)}
+                            <div className="flex items-center gap-2 w-full sm:w-auto justify-between border-t sm:border-t-0 border-slate-800/80 pt-1 sm:pt-0">
+                                <div>
+                                    <div className="text-[9px] sm:text-[10px] text-slate-400">Wallet Balance:</div>
+                                    <div className="text-xs font-black text-emerald-400">
+                                        {formatPrice(user.wallet_balance, currency)}
+                                    </div>
                                 </div>
-                            </div>
 
-                            <Link
-                                href={route('billing.index')}
-                                className="ml-2 px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-xs font-bold text-rose-300 rounded-xl border border-rose-500/30 transition-colors"
-                            >
-                                Wallet & Billing
-                            </Link>
+                                <Link
+                                    href={route('billing.index')}
+                                    className="px-2.5 py-1 sm:px-3 sm:py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-[11px] sm:text-xs font-bold text-rose-300 rounded-xl border border-rose-500/30 transition-colors"
+                                >
+                                    Wallet & Billing
+                                </Link>
+                            </div>
                         </div>
                     </div>
                 </div>

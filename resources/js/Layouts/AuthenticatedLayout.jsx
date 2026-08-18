@@ -110,13 +110,81 @@ export default function AuthenticatedLayout({ header, children, selectedCurrency
                         <div className="flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown(!showingNavigationDropdown)}
-                                className="p-2 text-slate-400 hover:text-white"
+                                className="p-2 text-slate-400 hover:text-white text-xl"
                             >
-                                ☰
+                                {showingNavigationDropdown ? '✕' : '☰'}
                             </button>
                         </div>
                     </div>
                 </div>
+
+                {/* Mobile Navigation Drawer */}
+                {showingNavigationDropdown && (
+                    <div className="sm:hidden border-b border-slate-800 bg-slate-900 px-4 pt-3 pb-6 space-y-4">
+                        <div className="space-y-2">
+                            <Link
+                                href={route('dashboard')}
+                                className={`block px-3 py-2 rounded-xl text-sm font-bold ${
+                                    route().current('dashboard') ? 'bg-rose-500 text-white' : 'text-slate-300 hover:bg-slate-800'
+                                }`}
+                            >
+                                Mother Dashboard
+                            </Link>
+                            <Link
+                                href={route('billing.index')}
+                                className={`block px-3 py-2 rounded-xl text-sm font-bold ${
+                                    route().current('billing.index') ? 'bg-rose-500 text-white' : 'text-slate-300 hover:bg-slate-800'
+                                }`}
+                            >
+                                Wallet & Invoices
+                            </Link>
+                            <a
+                                href={route('catalog')}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="block px-3 py-2 rounded-xl text-sm font-semibold text-slate-400 hover:bg-slate-800"
+                            >
+                                Specialists & Plans ↗
+                            </a>
+                        </div>
+
+                        {/* Mobile Currency Switcher */}
+                        <div className="pt-2 border-t border-slate-800">
+                            <div className="text-xs font-semibold text-slate-400 mb-2">Select Display Currency:</div>
+                            <div className="flex items-center gap-2">
+                                {Object.values(CURRENCIES).map((curr) => (
+                                    <button
+                                        key={curr.code}
+                                        onClick={() => handleCurrencySelect(curr.code)}
+                                        className={`flex-1 py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 border ${
+                                            (selectedCurrency || currency) === curr.code
+                                                ? 'bg-rose-500 border-rose-500 text-white shadow-md'
+                                                : 'bg-slate-950 border-slate-800 text-slate-300'
+                                        }`}
+                                    >
+                                        <span>{curr.flag}</span>
+                                        <span>{curr.code}</span>
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Mobile Profile & Logout */}
+                        <div className="pt-2 border-t border-slate-800 flex items-center justify-between text-xs">
+                            <div className="font-bold text-slate-200">
+                                👤 {user.name}
+                            </div>
+                            <Link
+                                href={route('logout')}
+                                method="post"
+                                as="button"
+                                className="px-3 py-1.5 bg-rose-500/20 text-rose-300 font-bold rounded-lg border border-rose-500/30"
+                            >
+                                Log Out
+                            </Link>
+                        </div>
+                    </div>
+                )}
             </nav>
 
             {header && (
