@@ -12,6 +12,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class ProcessTelegramMessageJob implements ShouldQueue
 {
@@ -34,6 +35,8 @@ class ProcessTelegramMessageJob implements ShouldQueue
         $chatId = $message['chat']['id'] ?? null;
         $text = trim($message['text'] ?? '');
         $username = $message['from']['username'] ?? null;
+
+        Log::info("Processing Telegram message from Chat ID {$chatId}: '{$text}'");
 
         if (!$chatId || empty($text)) {
             return;
@@ -71,7 +74,7 @@ class ProcessTelegramMessageJob implements ShouldQueue
                 return;
             }
 
-            $noTokenMsg = "Welcome to <b>Mother of the Year</b>! 🌸\n\nTo connect your Telegram and activate AI Sleep Tracking, please sign up or log in on our website.";
+            $noTokenMsg = "Welcome to <b>Mother of the Year</b>! 🌸\n\nTo connect your Telegram and activate AI Sleep Tracking, please sign up or log in on our website: https://motheroftheyear.co.uk";
             $telegramService->sendMessage($chatId, $noTokenMsg);
             return;
         }
@@ -80,7 +83,7 @@ class ProcessTelegramMessageJob implements ShouldQueue
         $user = User::where('telegram_id', $chatId)->first();
 
         if (!$user) {
-            $telegramService->sendMessage($chatId, "We couldn't find your active account. Please sign up on the Mother of the Year website to activate your subscription.");
+            $telegramService->sendMessage($chatId, "We couldn't find your active account. Please sign up on the Mother of the Year website to activate your subscription: https://motheroftheyear.co.uk");
             return;
         }
 

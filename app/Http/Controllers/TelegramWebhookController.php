@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\ProcessTelegramMessageJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class TelegramWebhookController extends Controller
 {
@@ -12,12 +13,14 @@ class TelegramWebhookController extends Controller
     {
         $payload = $request->all();
 
+        Log::info('Telegram Webhook Received:', $payload);
+
         if (!empty($payload)) {
-            // Dispatch asynchronously to Redis queue
+            // Process message job (sync or async depending on QUEUE_CONNECTION)
             ProcessTelegramMessageJob::dispatch($payload);
         }
 
-        // Immediately return 200 OK to Telegram webhook
+        // Return 200 OK to Telegram
         return response()->json(['status' => 'ok'], 200);
     }
 }
