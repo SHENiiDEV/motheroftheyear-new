@@ -2,6 +2,8 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import CookieConsent from '@/Components/CookieConsent';
+import OfflineBanner from '@/Components/OfflineBanner';
 import { Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { Moon, User, LogOut, LayoutDashboard, Globe } from 'lucide-react';
@@ -196,6 +198,10 @@ export default function AuthenticatedLayout({ header, children, selectedCurrency
             )}
 
             <main>{children}</main>
+
+            {/* System Utilities */}
+            <OfflineBanner />
+            <CookieConsent />
         </div>
     );
 }

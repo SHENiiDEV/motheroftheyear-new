@@ -3,6 +3,8 @@ import { Moon, ChevronDown, Check } from 'lucide-react';
 import { useState } from 'react';
 import { CURRENCIES } from '@/Utils/currency';
 import { motion, AnimatePresence } from 'framer-motion';
+import CookieConsent from '@/Components/CookieConsent';
+import OfflineBanner from '@/Components/OfflineBanner';
 
 export default function GuestLayout({ children }) {
     const [currency, setCurrency] = useState(() => {
@@ -120,6 +122,10 @@ export default function GuestLayout({ children }) {
             <div className="relative z-10 py-6 text-center text-xs text-slate-500">
                 © {new Date().getFullYear()} CARING AND SUPPORTIVE SERVICE LTD. All rights reserved.
             </div>
+
+            {/* System Utilities */}
+            <OfflineBanner />
+            <CookieConsent />
         </div>
     );
 }

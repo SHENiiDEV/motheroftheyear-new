@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { CURRENCIES, formatPrice } from '@/Utils/currency';
 import DatePicker from '@/Components/DatePicker';
+import CookieConsent from '@/Components/CookieConsent';
+import OfflineBanner from '@/Components/OfflineBanner';
 
 const ALL_TESTIMONIALS = [
     {
@@ -1071,6 +1073,10 @@ export default function Catalog({ doctors, botUsername }) {
                     </div>
                 </div>
             </footer>
+
+            {/* System Utilities */}
+            <OfflineBanner />
+            <CookieConsent />
         </div>
     );
 }
