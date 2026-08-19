@@ -2,6 +2,7 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import DatePicker from '@/Components/DatePicker';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { WORLD_COUNTRIES } from '@/Utils/countries';
@@ -127,19 +128,12 @@ export default function Register() {
                 {/* Date of Birth */}
                 <div>
                     <InputLabel htmlFor="date_of_birth" value="Date of Birth *" className="text-slate-300 text-xs font-semibold uppercase tracking-wider mb-1" />
-                    <div className="relative">
-                        <Calendar className="absolute left-3.5 top-3 w-4 h-4 text-slate-500" />
-                        <TextInput
-                            id="date_of_birth"
-                            type="date"
-                            name="date_of_birth"
-                            value={data.date_of_birth}
-                            className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 pl-10 pr-4 text-sm text-white focus:outline-none focus:border-rose-500 transition-colors"
-                            onChange={(e) => setData('date_of_birth', e.target.value)}
-                            required
-                        />
-                    </div>
-                    <InputError message={errors.date_of_birth} className="mt-1" />
+                    <DatePicker
+                        value={data.date_of_birth}
+                        onChange={(val) => setData('date_of_birth', val)}
+                        error={errors.date_of_birth}
+                        placeholder="Select your date of birth"
+                    />
                 </div>
 
                 {/* Address Divider Header */}

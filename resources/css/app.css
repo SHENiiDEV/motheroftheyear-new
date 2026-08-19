@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Dark Theme Overrides for react-datepicker */
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker {
+    font-family: inherit;
+    background-color: #0f172a !important;
+    border: 1px solid #1e293b !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6) !important;
+    color: #f8fafc !important;
+    overflow: hidden;
+    padding: 0.5rem;
+}
+
+.react-datepicker__header {
+    background-color: #020617 !important;
+    border-bottom: 1px solid #1e293b !important;
+    border-radius: 0.75rem 0.75rem 0 0 !important;
+    padding-top: 0.75rem !important;
+}
+
+.react-datepicker__current-month,
+.react-datepicker-time__header,
+.react-datepicker-year-header {
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 0.875rem !important;
+}
+
+.react-datepicker__day-name {
+    color: #94a3b8 !important;
+    font-weight: 600 !important;
+}
+
+.react-datepicker__day {
+    color: #cbd5e1 !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.15s ease-in-out;
+}
+
+.react-datepicker__day:hover {
+    background-color: #1e293b !important;
+    color: #ffffff !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+    background: linear-gradient(to right, #f43f5e, #9333ea) !important;
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+.react-datepicker__day--disabled {
+    color: #475569 !important;
+    opacity: 0.4;
+}
+
+.react-datepicker__month-select,
+.react-datepicker__year-select {
+    background-color: #020617 !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+    border-radius: 0.5rem !important;
+    padding: 0.25rem 0.5rem !important;
+    font-size: 0.75rem !important;
+    font-weight: 700 !important;
+    outline: none !important;
+    cursor: pointer;
+}
+
+.react-datepicker__navigation-icon::before {
+    border-color: #94a3b8 !important;
+}

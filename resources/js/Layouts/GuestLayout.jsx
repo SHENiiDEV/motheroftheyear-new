@@ -84,10 +84,24 @@ export default function GuestLayout({ children }) {
                         </div>
 
                         <Link
-                            href="/"
-                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 rounded-xl transition-all whitespace-nowrap shrink-0"
+                            href={route('login')}
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
                         >
-                            Back to Doctors ↗
+                            Log In
+                        </Link>
+
+                        <Link
+                            href={route('register')}
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-xl shadow-md transition-all whitespace-nowrap shrink-0"
+                        >
+                            Register
+                        </Link>
+
+                        <Link
+                            href="/"
+                            className="hidden sm:inline-block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white bg-slate-900 border border-slate-800 rounded-xl transition-all whitespace-nowrap shrink-0"
+                        >
+                            Doctors ↗
                         </Link>
                     </div>
                 </div>

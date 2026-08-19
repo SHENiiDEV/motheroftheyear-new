@@ -7,6 +7,7 @@ import {
     HelpCircle, Activity, Award, MessageSquare, Zap, Smile, Lock, GraduationCap, FileCheck, Check, Globe
 } from 'lucide-react';
 import { CURRENCIES, formatPrice } from '@/Utils/currency';
+import DatePicker from '@/Components/DatePicker';
 
 const ALL_TESTIMONIALS = [
     {
@@ -333,6 +334,12 @@ export default function Catalog({ doctors, botUsername }) {
                             className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
                         >
                             Client Login
+                        </Link>
+                        <Link
+                            href={route('register')}
+                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-xl shadow-md transition-all whitespace-nowrap shrink-0"
+                        >
+                            Register Account
                         </Link>
                     </div>
                 </div>
@@ -855,14 +862,12 @@ export default function Catalog({ doctors, botUsername }) {
                                     <label className="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
                                         Date of Birth *
                                     </label>
-                                    <input
-                                        type="date"
-                                        required
+                                    <DatePicker
                                         value={data.date_of_birth}
-                                        onChange={(e) => setData('date_of_birth', e.target.value)}
-                                        className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2.5 px-3 text-xs text-white focus:outline-none focus:border-rose-500 transition-colors"
+                                        onChange={(val) => setData('date_of_birth', val)}
+                                        error={errors.date_of_birth}
+                                        placeholder="Select your date of birth"
                                     />
-                                    {errors.date_of_birth && <div className="text-[11px] text-rose-400 mt-1">{errors.date_of_birth}</div>}
                                 </div>
 
                                 {/* Address Section */}
