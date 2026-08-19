@@ -72,4 +72,10 @@ class MotherOfTheYearTest extends TestCase
         $response = $this->actingAs($user)->get('/dashboard');
         $response->assertStatus(200);
     }
+
+    public function test_custom_404_error_page_is_rendered(): void
+    {
+        $response = $this->get('/non-existent-page-url');
+        $response->assertStatus(404);
+    }
 }

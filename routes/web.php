@@ -36,3 +36,8 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+// Fallback 404 Route for undefined URLs
+Route::fallback(function () {
+    return Inertia\Inertia::render('Error', ['status' => 404])->toResponse(request())->setStatusCode(404);
+});
