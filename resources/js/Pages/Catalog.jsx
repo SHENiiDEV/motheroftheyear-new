@@ -252,9 +252,11 @@ export default function Catalog({ doctors, botUsername }) {
             <nav className="relative z-20 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/80 sticky top-0">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
                     <Link href="/" className="flex items-center gap-2 shrink-0">
-                        <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-lg shadow-rose-500/20 shrink-0">
-                            <Moon className="w-4 h-4 text-white" />
-                        </div>
+                        <img
+                            src="/images/favicon.png"
+                            alt="Mother of the Year Logo"
+                            className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl object-cover shadow-lg shadow-rose-500/30 border border-rose-500/30 shrink-0"
+                        />
                         <div className="flex flex-row items-center gap-1.5 leading-none">
                             <span className="font-black text-sm sm:text-base tracking-tight text-white whitespace-nowrap">
                                 MOTHER

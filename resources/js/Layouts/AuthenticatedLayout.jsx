@@ -32,9 +32,11 @@ export default function AuthenticatedLayout({ header, children, selectedCurrency
                     <div className="flex h-16 justify-between items-center">
                         <div className="flex items-center gap-8">
                             <Link href="/" className="flex items-center gap-2 shrink-0">
-                                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-rose-500 to-purple-600 flex items-center justify-center shadow-md shrink-0">
-                                    <Moon className="w-4 h-4 text-white" />
-                                </div>
+                                <img
+                                    src="/images/favicon.png"
+                                    alt="Mother of the Year Logo"
+                                    className="w-8 h-8 rounded-xl object-cover shadow-lg shadow-rose-500/30 border border-rose-500/30 shrink-0"
+                                />
                                 <div className="flex flex-row items-center gap-1.5 leading-none">
                                     <span className="font-black text-sm tracking-tight text-white whitespace-nowrap">
                                         MOTHER
