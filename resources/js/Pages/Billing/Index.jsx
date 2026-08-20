@@ -283,13 +283,21 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
                                                     {inv.status.toUpperCase()}
                                                 </span>
                                             </td>
-                                            <td className="py-4 text-right">
+                                            <td className="py-4 text-right flex items-center justify-end gap-2">
                                                 <button
                                                     onClick={() => setSelectedInvoice(inv)}
                                                     className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-lg transition-colors inline-flex items-center gap-1"
                                                 >
-                                                    <FileText className="w-3.5 h-3.5 text-sky-400" /> View Invoice
+                                                    <FileText className="w-3.5 h-3.5 text-sky-400" /> View
                                                 </button>
+                                                <a
+                                                    href={route('billing.invoice.download', inv.id)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="px-3 py-1.5 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 font-bold rounded-lg border border-rose-500/30 transition-colors inline-flex items-center gap-1 text-xs"
+                                                >
+                                                    <Download className="w-3.5 h-3.5" /> PDF Invoice
+                                                </a>
                                             </td>
                                         </tr>
                                     ))
@@ -320,6 +328,7 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
                                     <th className="pb-3">Date</th>
                                     <th className="pb-3">Amount</th>
                                     <th className="pb-3 text-right">Balance After</th>
+                                    <th className="pb-3 text-right">Tax Invoice</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-slate-800/60 text-slate-300">
@@ -343,11 +352,21 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
                                                 {tx.type === 'deposit' ? '+' : '-'}{formatPrice(tx.amount, currency)}
                                             </td>
                                             <td className="py-4 font-bold text-white text-right">{formatPrice(tx.balance_after, currency)}</td>
+                                            <td className="py-4 text-right">
+                                                <a
+                                                    href={route('billing.invoice.download', tx.id)}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    className="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold rounded-lg transition-colors inline-flex items-center gap-1 text-[11px]"
+                                                >
+                                                    <Download className="w-3 h-3 text-emerald-400" /> PDF Invoice
+                                                </a>
+                                            </td>
                                         </tr>
                                     ))
                                 ) : (
                                     <tr>
-                                        <td colSpan={5} className="text-center py-8 text-slate-500">
+                                        <td colSpan={6} className="text-center py-8 text-slate-500">
                                             No transactions recorded yet.
                                         </td>
                                     </tr>

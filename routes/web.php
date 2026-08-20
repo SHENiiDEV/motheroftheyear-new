@@ -27,6 +27,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/billing', [BillingController::class, 'index'])->name('billing.index');
     Route::post('/billing/profile', [BillingController::class, 'updateBillingProfile'])->name('billing.profile');
     Route::post('/billing/topup', [BillingController::class, 'topUpWallet'])->name('billing.topup');
+    Route::get('/billing/invoice/{id}', [BillingController::class, 'downloadInvoice'])->name('billing.invoice.download');
+    Route::get('/wallet/invoice/{id}', [BillingController::class, 'downloadInvoice'])->name('wallet.invoice.download');
 });
 
 Route::middleware('auth')->group(function () {

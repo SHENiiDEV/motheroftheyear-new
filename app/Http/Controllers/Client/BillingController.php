@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\WalletTopUpMail;
 use App\Models\Invoice;
 use App\Models\Transaction;
 use App\Models\User;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -67,7 +71,7 @@ class BillingController extends Controller
         $user->update(['wallet_balance' => $newBalance]);
 
         // Record Transaction
-        Transaction::create([
+        $tx = Transaction::create([
             'user_id' => $user->id,
             'type' => 'deposit',
             'amount' => $amount,
@@ -76,7 +80,7 @@ class BillingController extends Controller
         ]);
 
         // Create Invoice
-        Invoice::create([
+        $invoice = Invoice::create([
             'invoice_number' => 'INV-' . date('Y') . '-' . strtoupper(Str::random(6)),
             'user_id' => $user->id,
             'doctor_id' => null,
@@ -95,6 +99,41 @@ class BillingController extends Controller
             'company_snapshot' => config('company'),
         ]);
 
+        // Send WalletTopUpMail with PDF Invoice Attachment
+        try {
+            Mail::to($user->email)->send(new WalletTopUpMail($user, $tx));
+        } catch (\Throwable $e) {
+            Log::warning("Failed to send WalletTopUpMail: {$e->getMessage()}");
+        }
+
         return back()->with('success', "Successfully added €{$amount} to your wallet balance!");
+    }
+
+    public function downloadInvoice(int $id)
+    {
+        /** @var User $user */
+        $user = Auth::user();
+
+        $invoice = Invoice::where('id', $id)->first();
+
+        if ($invoice) {
+            abort_if($invoice->user_id !== $user->id, 403);
+            $pdf = Pdf::loadView('pdf.wallet_invoice', [
+                'payment' => $invoice,
+                'user' => $user,
+            ]);
+            $ref = $invoice->gateway_reference;
+            return $pdf->download("Invoice_{$ref}.pdf");
+        }
+
+        $tx = Transaction::where('id', $id)->firstOrFail();
+        abort_if($tx->user_id !== $user->id, 403);
+
+        $pdf = Pdf::loadView('pdf.wallet_invoice', [
+            'payment' => $tx,
+            'user' => $user,
+        ]);
+        $ref = $tx->gateway_reference;
+        return $pdf->download("Invoice_{$ref}.pdf");
     }
 }

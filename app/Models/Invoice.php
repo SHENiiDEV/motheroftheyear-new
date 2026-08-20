@@ -28,6 +28,23 @@ class Invoice extends Model
         'company_snapshot' => 'array',
     ];
 
+    protected $appends = ['gateway_reference', 'service_name', 'currency'];
+
+    public function getGatewayReferenceAttribute(): string
+    {
+        return $this->invoice_number ?: ('INV-' . str_pad($this->id, 6, '0', STR_PAD_LEFT));
+    }
+
+    public function getServiceNameAttribute(): string
+    {
+        return $this->doctor_name ? "Pediatric Sleep Care Subscription: {$this->doctor_name}" : 'Weekly Care Plan Subscription';
+    }
+
+    public function getCurrencyAttribute(): string
+    {
+        return 'EUR';
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

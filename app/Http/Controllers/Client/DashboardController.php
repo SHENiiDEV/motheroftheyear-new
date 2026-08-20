@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\DocumentPaymentMail;
+use App\Models\Alert;
 use App\Models\Invoice;
 use App\Models\SleepLog;
 use App\Models\Transaction;
@@ -10,6 +12,8 @@ use App\Models\User;
 use App\Services\DeepSeekService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -164,7 +168,7 @@ class DashboardController extends Controller
         ]);
 
         // Generate Invoice
-        Invoice::create([
+        $invoice = Invoice::create([
             'invoice_number' => 'INV-' . date('Y') . '-' . strtoupper(Str::random(6)),
             'user_id' => $user->id,
             'doctor_id' => $config['id'],
@@ -182,6 +186,13 @@ class DashboardController extends Controller
             ],
             'company_snapshot' => config('company'),
         ]);
+
+        // Send DocumentPaymentMail with attached DomPDF invoice
+        try {
+            Mail::to($user->email)->send(new DocumentPaymentMail($user, $invoice));
+        } catch (\Throwable $e) {
+            Log::warning("Failed to send DocumentPaymentMail: {$e->getMessage()}");
+        }
 
         return back()->with('success', "Assigned Doctor updated to {$config['name']}! €{$doctorPrice} was deducted from your wallet balance and invoice generated.");
     }

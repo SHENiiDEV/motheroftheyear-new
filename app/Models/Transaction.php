@@ -23,6 +23,31 @@ class Transaction extends Model
         'balance_after' => 'decimal:2',
     ];
 
+    protected $appends = ['gateway_reference', 'service_name', 'currency', 'status'];
+
+    public function getGatewayReferenceAttribute(): string
+    {
+        if ($this->type === 'deposit') {
+            return 'TOPUP-' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
+        }
+        return 'WALLET-DEDUCT-' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
+    }
+
+    public function getServiceNameAttribute(): string
+    {
+        return $this->description ?: ($this->type === 'deposit' ? 'Wallet Balance Top-Up' : 'Specialist Weekly Care Subscription');
+    }
+
+    public function getCurrencyAttribute(): string
+    {
+        return 'EUR';
+    }
+
+    public function getStatusAttribute(): string
+    {
+        return 'paid';
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
