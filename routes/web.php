@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Route;
 // Public Doctor Catalog & Subscription Landing
 Route::get('/', [CatalogController::class, 'index'])->name('catalog');
 
+// Additional Informational Pages
+Route::get('/how-it-works', fn () => Inertia\Inertia::render('HowItWorks'))->name('how-it-works');
+Route::get('/about', fn () => Inertia\Inertia::render('AboutUs', ['company' => config('company')]))->name('about');
+Route::get('/support', fn () => Inertia\Inertia::render('Support', ['company' => config('company')]))->name('support');
+
+// Contact Us Routes
+Route::get('/contact', [\App\Http\Controllers\ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [\App\Http\Controllers\ContactController::class, 'submit'])->name('contact.submit');
+
 // Legal Routes
 Route::get('/privacy-policy', [LegalController::class, 'privacyPolicy'])->name('legal.privacy');
 Route::get('/terms-of-service', [LegalController::class, 'termsOfService'])->name('legal.terms');

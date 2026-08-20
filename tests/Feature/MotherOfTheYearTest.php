@@ -78,4 +78,25 @@ class MotherOfTheYearTest extends TestCase
         $response = $this->get('/non-existent-page-url');
         $response->assertStatus(404);
     }
+
+    public function test_informational_pages_are_accessible(): void
+    {
+        $this->get('/how-it-works')->assertStatus(200);
+        $this->get('/about')->assertStatus(200);
+        $this->get('/support')->assertStatus(200);
+        $this->get('/contact')->assertStatus(200);
+    }
+
+    public function test_contact_ticket_submission(): void
+    {
+        $response = $this->post('/contact', [
+            'name' => 'Sophia Martinez',
+            'email' => 'sophia@example.com',
+            'subject' => 'Question about Sleep Assessment',
+            'message' => 'Hello, I would like to inquire about Dr. Amanda Vance scheduling.',
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('success');
+    }
 }

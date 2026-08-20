@@ -271,24 +271,30 @@ export default function Catalog({ doctors, botUsername }) {
                     </Link>
 
                     <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-                        <a
-                            href="#doctors"
-                            className="hidden md:inline-block text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+                        <Link
+                            href="/how-it-works"
+                            className="hidden md:inline-block text-xs font-bold text-slate-300 hover:text-white transition-colors"
                         >
-                            Attending Specialists
-                        </a>
-                        <a
-                            href="#calculator"
-                            className="hidden lg:inline-block text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+                            How It Works
+                        </Link>
+                        <Link
+                            href="/about"
+                            className="hidden md:inline-block text-xs font-bold text-slate-300 hover:text-white transition-colors"
                         >
-                            Sleep Assessment
-                        </a>
-                        <a
-                            href="#faq"
-                            className="hidden lg:inline-block text-sm font-semibold text-slate-300 hover:text-white transition-colors"
+                            About Us
+                        </Link>
+                        <Link
+                            href="/support"
+                            className="hidden md:inline-block text-xs font-bold text-slate-300 hover:text-white transition-colors"
                         >
-                            FAQ
-                        </a>
+                            Support & FAQ
+                        </Link>
+                        <Link
+                            href="/contact"
+                            className="hidden lg:inline-block text-xs font-bold text-slate-300 hover:text-white transition-colors"
+                        >
+                            Contact
+                        </Link>
 
                         {/* Interactive Floating Currency Dropdown */}
                         <div className="relative shrink-0">
@@ -1051,11 +1057,12 @@ export default function Catalog({ doctors, botUsername }) {
                     </div>
 
                     <div>
-                        <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-4">Platform</h4>
+                        <h4 className="text-xs font-bold text-slate-200 uppercase tracking-wider mb-4">Company & Platform</h4>
                         <ul className="space-y-2.5 text-xs text-slate-400 font-medium">
-                            <li><a href="#doctors" className="hover:text-white transition-colors">Attending Specialists</a></li>
-                            <li><a href="#calculator" className="hover:text-white transition-colors">Sleep Assessment Calculator</a></li>
-                            <li><a href="#faq" className="hover:text-white transition-colors">Frequently Asked Questions</a></li>
+                            <li><Link href="/how-it-works" className="hover:text-white transition-colors">How It Works</Link></li>
+                            <li><Link href="/about" className="hover:text-white transition-colors">About Us</Link></li>
+                            <li><Link href="/support" className="hover:text-white transition-colors">Support Desk & FAQ</Link></li>
+                            <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                         </ul>
                     </div>
 
@@ -1133,27 +1140,34 @@ export default function Catalog({ doctors, botUsername }) {
 
                                 {/* Navigation Links */}
                                 <div className="space-y-2.5 font-semibold text-sm">
-                                    <a
-                                        href="#doctors"
+                                    <Link
+                                        href="/how-it-works"
                                         onClick={() => setShowMobileMenu(false)}
                                         className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
                                     >
-                                        Attending Specialists
-                                    </a>
-                                    <a
-                                        href="#calculator"
+                                        How It Works
+                                    </Link>
+                                    <Link
+                                        href="/about"
                                         onClick={() => setShowMobileMenu(false)}
                                         className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
                                     >
-                                        Sleep Assessment Calculator
-                                    </a>
-                                    <a
-                                        href="#faq"
+                                        About Us
+                                    </Link>
+                                    <Link
+                                        href="/support"
                                         onClick={() => setShowMobileMenu(false)}
                                         className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
                                     >
-                                        Frequently Asked Questions
-                                    </a>
+                                        Support & FAQ
+                                    </Link>
+                                    <Link
+                                        href="/contact"
+                                        onClick={() => setShowMobileMenu(false)}
+                                        className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
+                                    >
+                                        Contact
+                                    </Link>
                                 </div>
 
                                 {/* Currency Switcher in Drawer */}
