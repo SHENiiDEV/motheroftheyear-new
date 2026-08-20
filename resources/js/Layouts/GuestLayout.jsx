@@ -25,7 +25,7 @@ export default function GuestLayout({ children }) {
             <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-rose-600/20 rounded-full blur-3xl pointer-events-none" />
 
             {/* Top Navigation Header for Guest Pages */}
-            <nav className="w-full relative z-20 border-b border-slate-800/80 backdrop-blur-md bg-slate-950/80 sticky top-0">
+            <nav className="w-full relative z-[100] border-b border-slate-800/80 backdrop-blur-md bg-slate-950/80 sticky top-0">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
                     <Link href="/" className="flex items-center gap-2 shrink-0">
                         <img
@@ -130,7 +130,7 @@ export default function GuestLayout({ children }) {
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 onClick={() => setShowMobileMenu(false)}
-                                className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 md:hidden"
+                                className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-[99999] md:hidden"
                             />
 
                             {/* Right-Side Slide Drawer Panel */}
@@ -139,7 +139,7 @@ export default function GuestLayout({ children }) {
                                 animate={{ x: 0 }}
                                 exit={{ x: '100%' }}
                                 transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-                                className="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-slate-950 border-l border-slate-800/90 shadow-2xl p-6 z-50 flex flex-col justify-between md:hidden overflow-y-auto"
+                                className="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-slate-950 border-l border-slate-800/90 shadow-2xl p-6 z-[100000] md:hidden overflow-y-auto"
                             >
                                 <div className="space-y-6">
                                     {/* Drawer Header */}
