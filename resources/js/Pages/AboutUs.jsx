@@ -20,12 +20,12 @@ export default function AboutUs({ company }) {
         setShowCurrencyMenu(false);
     };
 
-    const companyData = company || {
-        company_name: 'CARING AND SUPPORTIVE SERVICE LTD',
-        company_number: '16120199',
-        registered_office_address: '58 Mund St, London, United Kingdom, W14 9LZ',
-        email: 'support@caringandsupportive.co.uk',
-        phone: '+44 20 7946 0912',
+    const companyData = {
+        company_name: company?.company_name || company?.name || 'CARING AND SUPPORTIVE SERVICE LTD',
+        company_number: company?.company_number || company?.tax_id || '16120199',
+        registered_office_address: company?.registered_office_address || company?.address || '58 Mund St, London, United Kingdom, W14 9LZ',
+        email: company?.email || 'support@caringandsupportive.co.uk',
+        phone: company?.phone || '+44 20 7946 0912',
     };
 
     const bentoStats = [
