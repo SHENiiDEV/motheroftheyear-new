@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     Moon, Sparkles, Send, CheckCircle2, ArrowRight, User, Mail, Star,
     ShieldCheck, Heart, Clock, AlertTriangle, ChevronDown, ChevronUp,
-    HelpCircle, Activity, Award, MessageSquare, Zap, Smile, Lock, GraduationCap, FileCheck, Check, Globe
+    HelpCircle, Activity, Award, MessageSquare, Zap, Smile, Lock, GraduationCap, FileCheck, Check, Globe, Menu, X
 } from 'lucide-react';
 import { CURRENCIES, formatPrice } from '@/Utils/currency';
 import DatePicker from '@/Components/DatePicker';
@@ -164,6 +164,7 @@ export default function Catalog({ doctors, botUsername }) {
         return localStorage.getItem('app_currency') || 'EUR';
     });
     const [showCurrencyMenu, setShowCurrencyMenu] = useState(false);
+    const [showMobileMenu, setShowMobileMenu] = useState(false);
 
     const handleCurrencySelect = (code) => {
         setCurrency(code);
@@ -335,18 +336,139 @@ export default function Catalog({ doctors, botUsername }) {
 
                         <Link
                             href={route('login')}
-                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
+                            className="hidden sm:inline-block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold text-rose-300 hover:text-white bg-rose-500/10 border border-rose-500/20 rounded-xl transition-all whitespace-nowrap shrink-0"
                         >
                             Client Login
                         </Link>
                         <Link
                             href={route('register')}
-                            className="px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-xl shadow-md transition-all whitespace-nowrap shrink-0"
+                            className="hidden sm:inline-block px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-rose-500 to-purple-600 hover:from-rose-600 hover:to-purple-700 rounded-xl shadow-md transition-all whitespace-nowrap shrink-0"
                         >
                             Register Account
                         </Link>
+
+                        {/* Hamburger Button for Mobile */}
+                        <button
+                            onClick={() => setShowMobileMenu(true)}
+                            className="md:hidden p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white transition-colors ml-1"
+                            aria-label="Open Mobile Menu"
+                        >
+                            <Menu className="w-5 h-5 text-rose-400" />
+                        </button>
                     </div>
                 </div>
+
+                {/* Mobile Right-Side Sliding Drawer Menu */}
+                <AnimatePresence>
+                    {showMobileMenu && (
+                        <>
+                            {/* Dark Backdrop Overlay */}
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                onClick={() => setShowMobileMenu(false)}
+                                className="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 md:hidden"
+                            />
+
+                            {/* Right-Side Slide Drawer Panel */}
+                            <motion.div
+                                initial={{ x: '100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: '100%' }}
+                                transition={{ type: 'spring', damping: 25, stiffness: 220 }}
+                                className="fixed inset-y-0 right-0 w-80 max-w-[85vw] bg-slate-950 border-l border-slate-800/90 shadow-2xl p-6 z-50 flex flex-col justify-between md:hidden overflow-y-auto"
+                            >
+                                <div className="space-y-6">
+                                    {/* Drawer Header */}
+                                    <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
+                                        <div className="flex items-center gap-2">
+                                            <img
+                                                src="/images/favicon.png"
+                                                alt="Logo"
+                                                className="w-8 h-8 rounded-xl object-cover shadow-lg shadow-rose-500/30 border border-rose-500/30"
+                                            />
+                                            <div className="flex flex-row items-center gap-1.5 leading-none">
+                                                <span className="font-black text-sm text-white">MOTHER</span>
+                                                <span className="text-[10px] font-bold text-rose-300">OF THE YEAR</span>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setShowMobileMenu(false)}
+                                            className="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
+                                        >
+                                            <X className="w-5 h-5 text-slate-300" />
+                                        </button>
+                                    </div>
+
+                                    {/* Navigation Links */}
+                                    <div className="space-y-2.5 font-semibold text-sm">
+                                        <a
+                                            href="#doctors"
+                                            onClick={() => setShowMobileMenu(false)}
+                                            className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
+                                        >
+                                            Attending Specialists
+                                        </a>
+                                        <a
+                                            href="#calculator"
+                                            onClick={() => setShowMobileMenu(false)}
+                                            className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
+                                        >
+                                            Sleep Assessment Calculator
+                                        </a>
+                                        <a
+                                            href="#faq"
+                                            onClick={() => setShowMobileMenu(false)}
+                                            className="block py-3 px-4 rounded-2xl bg-slate-900/60 border border-slate-800/60 text-slate-200 hover:text-white hover:bg-slate-800 transition-colors"
+                                        >
+                                            Frequently Asked Questions
+                                        </a>
+                                    </div>
+
+                                    {/* Currency Switcher in Drawer */}
+                                    <div className="pt-3 border-t border-slate-800/80">
+                                        <div className="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Display Currency</div>
+                                        <div className="grid grid-cols-3 gap-2">
+                                            {Object.values(CURRENCIES).map((curr) => (
+                                                <button
+                                                    key={curr.code}
+                                                    onClick={() => {
+                                                        handleCurrencySelect(curr.code);
+                                                    }}
+                                                    className={`py-2.5 px-2 rounded-xl text-xs font-bold flex flex-col items-center justify-center gap-1 transition-all ${
+                                                        currency === curr.code
+                                                            ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm'
+                                                            : 'bg-slate-900 text-slate-400 border border-slate-800'
+                                                    }`}
+                                                >
+                                                    <span className="text-base">{curr.flag}</span>
+                                                    <span>{curr.code}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Auth Buttons at Bottom of Drawer */}
+                                <div className="space-y-3 pt-6 border-t border-slate-800/80 mt-6">
+                                    <Link
+                                        href={route('login')}
+                                        className="block w-full py-3.5 text-center text-xs font-extrabold text-rose-300 bg-rose-500/10 border border-rose-500/20 rounded-2xl transition-all"
+                                    >
+                                        Client Portal Login
+                                    </Link>
+                                    <Link
+                                        href={route('register')}
+                                        className="block w-full py-3.5 text-center text-xs font-extrabold text-white bg-gradient-to-r from-rose-500 to-purple-600 rounded-2xl shadow-lg shadow-rose-500/20 transition-all"
+                                    >
+                                        Create Account
+                                    </Link>
+                                </div>
+                            </motion.div>
+                        </>
+                    )}
+                </AnimatePresence>
             </nav>
 
             {/* Hero Section */}
