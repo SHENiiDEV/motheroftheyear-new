@@ -185,7 +185,7 @@ export default function Contact({ company }) {
                             </div>
                             <div>
                                 <div className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Guaranteed Response SLA</div>
-                                <div className="text-emerald-400 font-extrabold mt-0.5">&lt; 4 Business Hours Response Guaranteed</div>
+                                <div className="text-emerald-400 font-extrabold mt-0.5">24-48 Hours Response Guaranteed</div>
                             </div>
                         </div>
                     </div>

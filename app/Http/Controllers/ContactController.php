@@ -40,6 +40,6 @@ class ContactController extends Controller
             Log::warning("Failed to send ContactMessageMail: {$e->getMessage()}");
         }
 
-        return back()->with('success', 'Your support ticket has been received! Our client team will respond within 4 business hours.');
+        return back()->with('success', 'Your support ticket has been received! Our client team will respond within 24-48 hours.');
     }
 }
