@@ -37,7 +37,7 @@ class Invoice extends Model
 
     public function getServiceNameAttribute(): string
     {
-        return $this->doctor_name ? "Pediatric Sleep Care Subscription: {$this->doctor_name}" : 'Weekly Care Plan Subscription';
+        return $this->doctor_name ? "Pediatric Sleep Care Subscription: {$this->doctor_name}" : 'Monthly Care Plan Subscription';
     }
 
     public function getCurrencyAttribute(): string

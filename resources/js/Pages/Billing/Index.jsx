@@ -102,9 +102,9 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
                         </div>
 
                         <div className="pt-6 border-t border-slate-800/80 mt-6 flex items-center justify-between">
-                            <span className="text-xs text-slate-400">Current Doctor Weekly Rate:</span>
+                            <span className="text-xs text-slate-400">Current Doctor Monthly Rate:</span>
                             <span className="text-sm font-bold text-rose-300">
-                                {formatPrice(user.weekly_price, currency)} / wk
+                                {formatPrice(user.weekly_price, currency)} / mo
                             </span>
                         </div>
                     </div>

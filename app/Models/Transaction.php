@@ -35,7 +35,7 @@ class Transaction extends Model
 
     public function getServiceNameAttribute(): string
     {
-        return $this->description ?: ($this->type === 'deposit' ? 'Wallet Balance Top-Up' : 'Specialist Weekly Care Subscription');
+        return $this->description ?: ($this->type === 'deposit' ? 'Wallet Balance Top-Up' : 'Specialist Monthly Care Subscription');
     }
 
     public function getCurrencyAttribute(): string

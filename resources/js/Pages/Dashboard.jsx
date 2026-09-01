@@ -135,7 +135,7 @@ export default function Dashboard({ user, company, children, sleepLogs, stats, t
                                     <div className="text-xs sm:text-sm font-bold text-white flex items-center gap-1.5">
                                         <span className="truncate max-w-[120px] sm:max-w-[180px]">{user.specialist?.name}</span>
                                         <span className="text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">
-                                            {formatPrice(user.weekly_price, currency)}/wk
+                                            {formatPrice(user.weekly_price, currency)}/mo
                                         </span>
                                     </div>
                                 </div>
@@ -646,8 +646,8 @@ export default function Dashboard({ user, company, children, sleepLogs, stats, t
                                         </div>
 
                                         <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
-                                            <span className="text-xs font-bold text-slate-400">Weekly Care Plan:</span>
-                                            <span className="text-xl font-black text-white">{formatPrice(spec.price, currency)} <span className="text-xs font-normal text-slate-400">/ wk</span></span>
+                                            <span className="text-xs font-bold text-slate-400">Monthly Care Plan:</span>
+                                            <span className="text-xl font-black text-white">{formatPrice(spec.price, currency)} <span className="text-xs font-normal text-slate-400">/ mo</span></span>
                                         </div>
                                     </div>
                                 ))}

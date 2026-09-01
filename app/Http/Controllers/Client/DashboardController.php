@@ -163,7 +163,7 @@ class DashboardController extends Controller
             'user_id' => $user->id,
             'type' => 'deduction',
             'amount' => $doctorPrice,
-            'description' => "Immediate Weekly Subscription Charge: {$config['name']}",
+            'description' => "Immediate Monthly Subscription Charge: {$config['name']}",
             'balance_after' => $newBalance,
         ]);
 

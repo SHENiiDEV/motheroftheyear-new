@@ -479,9 +479,9 @@ export default function Catalog({ doctors, botUsername }) {
 
                                 <div className="border-t border-slate-800/80 pt-4 mt-auto space-y-3">
                                     <div className="flex items-center justify-between">
-                                        <span className="text-xs text-slate-400">Weekly Care Plan:</span>
+                                        <span className="text-xs text-slate-400">Monthly Care Plan:</span>
                                         <span className="text-2xl font-black text-white">
-                                            {formatPrice(doctor.price, currency)} <span className="text-xs font-normal text-slate-400">/ wk</span>
+                                            {formatPrice(doctor.price, currency)} <span className="text-xs font-normal text-slate-400">/ mo</span>
                                         </span>
                                     </div>
 
@@ -747,8 +747,8 @@ export default function Catalog({ doctors, botUsername }) {
 
                             <div className="pt-4 border-t border-slate-800 flex items-center justify-between">
                                 <div>
-                                    <div className="text-xs text-slate-400">Weekly Care Plan:</div>
-                                    <div className="text-2xl font-black text-white">{formatPrice(previewDoctor.price, currency)} <span className="text-xs font-normal text-slate-400">/ wk</span></div>
+                                    <div className="text-xs text-slate-400">Monthly Care Plan:</div>
+                                    <div className="text-2xl font-black text-white">{formatPrice(previewDoctor.price, currency)} <span className="text-xs font-normal text-slate-400">/ mo</span></div>
                                 </div>
 
                                 <button
@@ -794,7 +794,7 @@ export default function Catalog({ doctors, botUsername }) {
                                 <div>
                                     <div className="text-xs font-semibold text-rose-400">Attending Physician:</div>
                                     <h3 className="text-lg font-bold text-white">{selectedDoctor.name}</h3>
-                                    <div className="text-xs text-slate-400">{formatPrice(selectedDoctor.price, currency)} / week</div>
+                                    <div className="text-xs text-slate-400">{formatPrice(selectedDoctor.price, currency)} / month</div>
                                 </div>
                             </div>
 

@@ -236,7 +236,7 @@ export default function HowItWorks() {
                         Transparent Specialist Care Plans
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-400">
-                        Billed weekly (`/wk`) with 0% hidden fees, full 14-day unused balance refund guarantee, and downloadable B2B PDF tax receipts.
+                        Billed monthly (`/mo`) with 0% hidden fees, full 14-day unused balance refund guarantee, and downloadable B2B PDF tax receipts.
                     </p>
                 </div>
 
@@ -260,7 +260,7 @@ export default function HowItWorks() {
                                 <div className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">{tier.tier}</div>
                                 <h3 className="text-xl font-black text-white mb-2">{tier.name}</h3>
                                 <div className="text-3xl font-black text-rose-300 mb-4">
-                                    {formatPrice(tier.price, currency)} <span className="text-xs text-slate-400 font-semibold">/ week</span>
+                                    {formatPrice(tier.price, currency)} <span className="text-xs text-slate-400 font-semibold">/ month</span>
                                 </div>
                                 <div className="text-xs font-bold text-slate-300 bg-slate-950 border border-slate-800 p-3 rounded-xl mb-6">
                                     Attending: <span className="text-rose-300 font-extrabold">{tier.doctor}</span>

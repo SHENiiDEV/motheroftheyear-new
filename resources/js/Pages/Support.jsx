@@ -31,8 +31,8 @@ export default function Support({ company }) {
 
     const faqs = [
         {
-            q: "How does the weekly specialist care plan billing work?",
-            a: "Specialist plans are billed weekly (`/wk`). Money is deducted directly from your profile wallet balance. You can switch your attending pediatrician or pause your plan anytime from your Mother Web Portal."
+            q: "How does the monthly specialist care plan billing work?",
+            a: "Specialist plans are billed monthly (`/mo`). Money is deducted directly from your profile wallet balance. You can switch your attending pediatrician or pause your plan anytime from your Mother Web Portal."
         },
         {
             q: "What is your 14-day unused wallet balance refund policy?",
@@ -40,7 +40,7 @@ export default function Support({ company }) {
         },
         {
             q: "How do 0% VAT UK B2B Reverse Charge tax invoices work?",
-            a: "All wallet deposits and weekly specialist charges generate an official UK B2B tax invoice issued by CARING AND SUPPORTIVE SERVICE LTD (Company No. 16120199). Invoices are stamped PAID & VERIFIED and feature 0% VAT Reverse Charge compliance for corporate clients."
+            a: "All wallet deposits and monthly specialist charges generate an official UK B2B tax invoice issued by CARING AND SUPPORTIVE SERVICE LTD (Company No. 16120199). Invoices are stamped PAID & VERIFIED and feature 0% VAT Reverse Charge compliance for corporate clients."
         },
         {
             q: "Is my baby's sleep journal and medical data private?",

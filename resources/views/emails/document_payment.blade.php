@@ -33,13 +33,13 @@
         <div class="content">
             <p style="font-size: 15px; color: #cbd5e1; margin-bottom: 20px;">Dear {{ $user->name }},</p>
             <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 25px; line-height: 1.5;">
-                Your weekly specialist care plan has been successfully activated. Your official B2B tax invoice and receipt is attached to this email.
+                Your monthly specialist care plan has been successfully activated. Your official B2B tax invoice and receipt is attached to this email.
             </p>
 
             <div class="tier-card">
                 <div class="tier-label">Unlocked Specialist Service</div>
                 <div class="tier-name">{{ $invoice->doctor_name }}</div>
-                <div class="tier-price">€{{ number_format($invoice->amount, 2) }} / week</div>
+                <div class="tier-price">€{{ number_format($invoice->amount, 2) }} / month</div>
             </div>
 
             <table class="details-table">
