@@ -26,7 +26,7 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
 
     // Form for Top-Up Wallet
     const topUpForm = useForm({
-        amount: 100,
+        amount: 1000,
     });
 
     const handleProfileSubmit = (e) => {
@@ -404,7 +404,7 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
 
                             <form onSubmit={handleTopUpSubmit} className="space-y-6">
                                 <div className="grid grid-cols-4 gap-2">
-                                    {[50, 100, 250, 500].map((preset) => (
+                                    {[500, 1000, 2500, 5000].map((preset) => (
                                         <button
                                             type="button"
                                             key={preset}
@@ -426,8 +426,8 @@ export default function BillingIndex({ user, company, invoices, transactions }) 
                                     </label>
                                     <input
                                         type="number"
-                                        min="10"
-                                        max="5000"
+                                        min="100"
+                                        max="20000"
                                         required
                                         value={topUpForm.data.amount}
                                         onChange={(e) => topUpForm.setData('amount', Number(e.target.value))}

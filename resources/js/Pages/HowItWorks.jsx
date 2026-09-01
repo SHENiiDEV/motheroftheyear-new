@@ -62,7 +62,7 @@ export default function HowItWorks() {
     const tiers = [
         {
             name: 'Starter Care Plan',
-            price: 49,
+            price: 490,
             tier: 'Standard',
             badge: 'Essential Sleep Care',
             doctor: 'Dr. Sarah Jenkins, M.D.',
@@ -71,7 +71,7 @@ export default function HowItWorks() {
         },
         {
             name: 'Clinical Pro Executive',
-            price: 199,
+            price: 1990,
             tier: 'Executive',
             badge: 'Most Popular Choice',
             doctor: 'Dr. Amanda Vance, M.D., Ph.D.',
@@ -80,7 +80,7 @@ export default function HowItWorks() {
         },
         {
             name: 'VIP Concierge Chair',
-            price: 499,
+            price: 4990,
             tier: 'VIP Concierge',
             badge: '24/7 Priority SLA',
             doctor: 'Dr. Victoria Montgomery, M.D.',

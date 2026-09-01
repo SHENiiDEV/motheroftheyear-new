@@ -30,8 +30,8 @@ class UserSeeder extends Seeder
             'specialist_id' => 2, // Dr. Emily Carter (€99/wk)
             'subscription_tier' => 'clinical care',
             'subscription_status' => 'active',
-            'weekly_price' => 99.00,
-            'wallet_balance' => 300.00,
+            'weekly_price' => 990.00,
+            'wallet_balance' => 5000.00,
             'invite_token' => Str::random(32),
             'billing_name' => 'Catherine Miller',
             'billing_address' => '58 Mund St, Apt 4B',
@@ -46,18 +46,18 @@ class UserSeeder extends Seeder
         Transaction::create([
             'user_id' => $user1->id,
             'type' => 'deposit',
-            'amount' => 300.00,
+            'amount' => 5000.00,
             'description' => 'Initial Wallet Deposit (Credit Card)',
-            'balance_after' => 300.00,
+            'balance_after' => 5000.00,
         ]);
 
         // Subscription deduction transaction
         Transaction::create([
             'user_id' => $user1->id,
             'type' => 'deduction',
-            'amount' => 99.00,
+            'amount' => 990.00,
             'description' => 'Immediate Weekly Subscription Fee: Dr. Emily Carter, M.D., FAAP',
-            'balance_after' => 201.00,
+            'balance_after' => 4010.00,
         ]);
 
         // Sample Invoice for Catherine
@@ -66,7 +66,7 @@ class UserSeeder extends Seeder
             'user_id' => $user1->id,
             'doctor_id' => 2,
             'doctor_name' => 'Dr. Emily Carter, M.D., FAAP',
-            'amount' => 99.00,
+            'amount' => 990.00,
             'type' => 'subscription',
             'status' => 'paid',
             'billing_snapshot' => [
@@ -90,11 +90,11 @@ class UserSeeder extends Seeder
             'date_of_birth' => '1992-08-20',
             'telegram_id' => 100002,
             'telegram_username' => 'olivia_t',
-            'specialist_id' => 1, // Dr. Sarah Jenkins (€49/wk)
+            'specialist_id' => 1, // Dr. Sarah Jenkins (€490/wk)
             'subscription_tier' => 'standard care',
             'subscription_status' => 'active',
-            'weekly_price' => 49.00,
-            'wallet_balance' => 200.00,
+            'weekly_price' => 490.00,
+            'wallet_balance' => 2500.00,
             'invite_token' => Str::random(32),
             'billing_name' => 'Olivia Taylor',
             'billing_address' => '500 Market St',

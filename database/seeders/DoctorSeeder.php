@@ -20,7 +20,7 @@ class DoctorSeeder extends Seeder
             'password' => Hash::make('password'),
             'specialization' => 'Certified Infant Sleep Specialist (0-3 Yrs)',
             'bio' => 'Certified pediatric sleep consultant with over 8 years of clinical experience. Helped over 1,400 families establish healthy sleep habits and gentle sleep training.',
-            'monthly_price' => 49.00,
+            'monthly_price' => 490.00,
             'avatar_url' => 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400',
             'is_doctor' => true,
         ]);
@@ -31,7 +31,7 @@ class DoctorSeeder extends Seeder
             'password' => Hash::make('password'),
             'specialization' => 'Board-Certified Pediatrician & Sleep Expert',
             'bio' => 'Senior pediatrician specializing in sleep regressions, frequent night awakenings, colic management, and night-weaning transitions.',
-            'monthly_price' => 75.00,
+            'monthly_price' => 990.00,
             'avatar_url' => '/images/emily_carter.jpg',
             'is_doctor' => true,
         ]);
@@ -42,7 +42,7 @@ class DoctorSeeder extends Seeder
             'password' => Hash::make('password'),
             'specialization' => 'Clinical Neurologist & Maternal Wellness Expert',
             'bio' => 'Specializes in postpartum maternal recovery, circadian rhythm alignment, and neurological sleep optimization for high-sensitivity infants.',
-            'monthly_price' => 99.00,
+            'monthly_price' => 1990.00,
             'avatar_url' => 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400',
             'is_doctor' => true,
         ]);

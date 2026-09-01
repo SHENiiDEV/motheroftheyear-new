@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('specialist_id')->default(2);
             $table->string('subscription_tier')->default('clinical care');
             $table->string('subscription_status')->default('active');
-            $table->decimal('weekly_price', 10, 2)->default(99.00);
+            $table->decimal('weekly_price', 10, 2)->default(990.00);
             $table->decimal('wallet_balance', 10, 2)->default(300.00);
             $table->string('invite_token', 64)->nullable()->unique()->index();
 
