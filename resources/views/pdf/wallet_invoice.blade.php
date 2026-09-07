@@ -135,7 +135,7 @@
             </td>
             <td style="vertical-align: middle; text-align: right;">
                 <div class="invoice-badge">Official Receipt</div>
-                <div class="paid-stamp">✓ Paid & Verified</div>
+                <div class="paid-stamp">PAID &amp; VERIFIED</div>
             </td>
         </tr>
     </table>
